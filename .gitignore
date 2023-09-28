@@ -1,3 +1,6 @@
+.idea/
+target/
+Selenium_saucedemo_store.iml
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

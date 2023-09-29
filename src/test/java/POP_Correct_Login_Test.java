@@ -34,7 +34,6 @@ public class POP_Correct_Login_Test extends SeleniumBaseTest{
                 .typePassword(password)
                 .submitLogin()
                 .assertProductsElementIsShown()
-                .expandLeftMenu()
                 .assertAboutWorking();
     }
 }

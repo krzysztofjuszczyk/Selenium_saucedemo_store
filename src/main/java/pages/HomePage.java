@@ -1,9 +1,13 @@
 package pages;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.time.Duration;
 
 public class HomePage {
     private WebDriver driver;
@@ -29,7 +33,7 @@ public class HomePage {
         return leftMenu.getAttribute("aria-hidden").contains("true");
     }
 
-    public HomePage expandLeftMenu(){
+    private HomePage expandLeftMenu(){
         if (isMenuHidden()) burgerButton.click();
         return this;
     }
@@ -42,6 +46,8 @@ public class HomePage {
 
     public void assertAboutWorking(){
         expandLeftMenu();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.elementToBeClickable(leftMenu_About));
         leftMenu_About.click();
         Assert.assertTrue(driver.getCurrentUrl().equals("https://saucelabs.com/"));
     }

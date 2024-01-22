@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
+import java.util.List;
 
 public class HomePage {
     private WebDriver driver;
@@ -28,6 +29,9 @@ public class HomePage {
 
     @FindBy(id = "about_sidebar_link")
     private WebElement leftMenu_About;
+
+    @FindBy (className = "inventory_list")
+    private List<WebElement> inventoryList;
 
     public boolean isMenuHidden(){
         return leftMenu.getAttribute("aria-hidden").contains("true");
@@ -51,4 +55,13 @@ public class HomePage {
         leftMenu_About.click();
         Assert.assertTrue(driver.getCurrentUrl().equals("https://saucelabs.com/"));
     }
+
+    public void printAllItems(){
+        for (WebElement e :
+                inventoryList) {
+            System.out.println(e.getText());
+        }
+    }
+
+
 }

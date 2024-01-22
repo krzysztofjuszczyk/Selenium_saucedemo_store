@@ -44,4 +44,13 @@ public class LoginPage {
         return this;
     }
 
+    public HomePage submitDefaultLogin() {
+        String password = "secret_sauce";
+        String name = "standard_user";
+        return new LoginPage(driver)
+                .typeUsername(name)
+                .typePassword(password)
+                .submitLogin();
+    }
+
 }

@@ -1,4 +1,5 @@
 package pages;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -33,6 +34,9 @@ public class HomePage {
     @FindBy (className = "inventory_list")
     private List<WebElement> inventoryList;
 
+    @FindBy (className = "shopping_cart_link" )
+    private WebElement shoppingCartBtn;
+
     public boolean isMenuHidden(){
         return leftMenu.getAttribute("aria-hidden").contains("true");
     }
@@ -60,8 +64,27 @@ public class HomePage {
         for (WebElement e :
                 inventoryList) {
             System.out.println(e.getText());
+
         }
     }
 
+    private WebElement findElement(String name){
+        for (WebElement e :
+                inventoryList) {
+            if (e.getText().contains(name)) {
+                return e;
+            }
+        }
+        return null;
+    }
 
+    public HomePage addItemToCart(String name){
+        WebElement e = findElement(name);
+        e.findElement(By.cssSelector("button[data-test^=\"add-to-cart\"]")).click();
+        return this;
+    }
+
+    public void goToShoppingCart() {
+        shoppingCartBtn.click();
+    }
 }
